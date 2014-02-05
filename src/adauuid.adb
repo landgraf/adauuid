@@ -25,6 +25,7 @@ package body adauuid is
     procedure Clear(U : in out UUID) is 
     begin
         uuid_clear(U.Bin);
+        U.Str := Null_uuid;
     end Clear;
 
     function "="(U1 : in UUID; U2 : in UUID) return Boolean is (Integer(uuid_compare(U1.Bin, U2.Bin)) = 0);
