@@ -1,0 +1,8 @@
+with "adauuid_libs_build";
+project adauuid_tools_build is 
+    for Main use ("test.adb");
+    for Exec_Dir use "../bin";
+    for Source_Dirs use ("../examples/");
+    for Object_Dir use "../obj";
+    for Languages use ("Ada");
+end adauuid_tools_build;
