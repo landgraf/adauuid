@@ -39,6 +39,9 @@ make install DESTDIR=%{buildroot} \
 prefix=%{_prefix} \
 libdir=%{_libdir}
 
+%check
+make test
+
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig

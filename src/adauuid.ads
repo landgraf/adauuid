@@ -11,12 +11,15 @@ package adauuid is
     procedure From_String(U : out UUID; Str : in String)
         with Pre => Str'Length <= UUID_String'Length; 
 
+    function Is_Null(Self : in UUID) return Boolean;
+
     procedure Parse(U : in out UUID; Translate : in Letter_Case := Upper)
         with Post => U.To_String /= null_uuid; 
 
     procedure Clear(U : in out UUID); 
     function "="(U1 : in UUID; U2 : in UUID) return Boolean;
     procedure Copy(Src : in UUID; Dst : out UUID);
+    
     
     private
     function Generate return UUID_Bin;

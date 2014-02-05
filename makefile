@@ -29,6 +29,10 @@ libs: build_libs
 build_libs: 
 	${BUILDER} -P gnat/${PROJECT}_libs_build  ${FLAGS}
 
+test: build_libs 
+	${BUILDER} -P gnat/${PROJECT}_tests_build  ${FLAGS}
+	./bin/adauuid_harness
+
 build_tools: build_libs 
 	${BUILDER} -P gnat/${PROJECT}_tools_build  ${FLAGS}
 

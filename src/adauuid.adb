@@ -36,6 +36,8 @@ package body adauuid is
 
     function "="(U1 : in UUID; U2 : in UUID) return Boolean is (Integer(uuid_compare(U1.Bin, U2.Bin)) = 0);
 
+    function Is_Null(Self : in UUID) return Boolean is (Integer(uuid_is_null(Self.Bin)) /= 0);
+    
     procedure Copy(Src : in UUID; Dst : out UUID) is
     begin
         uuid_copy(Src => Src.Bin, Dst => Dst.Bin);
