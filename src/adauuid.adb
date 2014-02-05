@@ -1,6 +1,8 @@
 with adauuid_internals; use adauuid_internals;
 package body adauuid is 
 
+    function To_String(U : in out UUID) return UUID_String is (U.Str);
+
     function Generate return UUID_Bin is
         U : UUID_Bin; 
     begin
@@ -8,31 +10,29 @@ package body adauuid is
         return U;
     end Generate;
             
-    function Parse(U : in UUID_Bin; Translate : in Letter_Case := Upper) return UUID is
-        Retval : UUID := Null_UUID; 
+    procedure Parse(U : in out UUID; Translate : in Letter_Case := Upper) is
     begin
         case Translate is
             when Upper =>
-                uuid_unparse_upper(U, Retval); 
+                uuid_unparse_upper(U.Bin, U.Str); 
             when Lower =>
-                uuid_unparse_lower(U, Retval); 
+                uuid_unparse_lower(U.Bin, U.Str); 
             when others =>
-                uuid_unparse(U, Retval); 
+                uuid_unparse(U.Bin, U.Str); 
         end case;
-
-        return retval;
     end Parse;
 
-    procedure Clear(U : in out UUID_Bin) is 
+    procedure Clear(U : in out UUID) is 
     begin
-        uuid_clear(U);
+        uuid_clear(U.Bin);
     end Clear;
 
-    function "="(U1 : in UUID_Bin; U2 : in UUID_Bin) return Boolean is (Integer(uuid_compare(U1, U2)) = 0);
+    function "="(U1 : in UUID; U2 : in UUID) return Boolean is (Integer(uuid_compare(U1.Bin, U2.Bin)) = 0);
 
-    procedure Copy(Src : in UUID_Bin; Dst : out UUID_Bin) is
+    procedure Copy(Src : in UUID; Dst : out UUID) is
     begin
-        uuid_copy(Src => Src, Dst => Dst);
+        uuid_copy(Src => Src.Bin, Dst => Dst.Bin);
+        uuid_unparse(Dst.Bin, Dst.Str);
     end Copy;
 end adauuid; 
 

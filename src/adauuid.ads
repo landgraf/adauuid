@@ -1,19 +1,21 @@
 with Interfaces.C; 
 package adauuid is 
-    subtype UUID is String(1..36); 
-    Null_UUID : constant UUID := (others => '-');
+    type UUID is tagged limited private;
+    subtype UUID_String is String(1..36);
+    type UUID_Bin is array (1..16) of Interfaces.C.unsigned_char; 
     type Letter_Case is (None, Upper, Lower); 
 
-    type UUID_Bin is limited private;
-    function Generate return UUID_Bin; 
-    function Parse(U : in UUID_Bin; Translate : in Letter_Case := Upper) return UUID; 
-    procedure Clear(U : in out UUID_Bin); 
-
-    function "="(U1 : in UUID_Bin; U2 : in UUID_Bin) return Boolean;
-
-    procedure Copy(Src : in UUID_Bin; Dst : out UUID_Bin);
+    procedure Parse(U : in out UUID; Translate : in Letter_Case := Upper); 
+    procedure Clear(U : in out UUID); 
+    function "="(U1 : in UUID; U2 : in UUID) return Boolean;
+    function To_String(U : in out UUID) return UUID_String; 
+    procedure Copy(Src : in UUID; Dst : out UUID);
     
     private
-    type UUID_Bin is array (1..16) of Interfaces.C.unsigned_char; 
+    function Generate return UUID_Bin;
+    type UUID is tagged limited record
+        Str : UUID_String := (others => '0');
+        Bin : UUID_Bin := Generate; 
+    end record;
 end adauuid; 
 
