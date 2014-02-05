@@ -5,4 +5,5 @@ project adauuid_tools_build is
     for Source_Dirs use ("../examples/");
     for Object_Dir use "../obj";
     for Languages use ("Ada");
+
 end adauuid_tools_build;

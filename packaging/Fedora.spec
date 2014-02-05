@@ -31,7 +31,7 @@ Requires:   %{name}%{?_isa} = %{version}-%{release}
 %build
 export FLAGS="%GPRbuild_optflags"
 export DEBUG=%{debug}
-make %{?_smp_mflags}
+make %{?_smp_mflags} build_libs
 
 
 %install

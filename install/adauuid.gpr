@@ -7,4 +7,8 @@ project adauuid is
     for Library_Kind use "relocatable";
     for Library_Name use "adauuid";
     for Externally_Built use "True";
+
+    package Linker is 
+        for Linker_Options use ("-luuid");
+    end Linker; 
 end adauuid; 
