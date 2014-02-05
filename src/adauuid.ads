@@ -8,6 +8,9 @@ package adauuid is
 
     function To_String(U : in out UUID) return UUID_String;
 
+    procedure From_String(U : out UUID; Str : in String)
+        with Pre => Str'Length <= UUID_String'Length; 
+
     procedure Parse(U : in out UUID; Translate : in Letter_Case := Upper)
         with Post => U.To_String /= null_uuid; 
 
