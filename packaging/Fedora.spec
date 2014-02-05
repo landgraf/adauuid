@@ -10,7 +10,7 @@ Source0:	%{name}-%{version}.tar.gz
 
 BuildRequires:	gcc-gnat > 4.8
 BuildRequires:  fedora-gnat-project-common > 3
-##Requires:	
+BuildRequires:  libuuid-devel
 
 %description
 %{summary}
@@ -64,9 +64,6 @@ libdir=%{_libdir}
 
 
 %changelog
-* Mon Dec 16 2013 Pavel Zhukov <landgraf@fedoraproject.org> - 2011-3
-- Fix requires
-
-* Mon Dec 16 2013 Pavel Zhukov <landgraf@fedoraproject.org> - 2011-1
+* Mon Dec 16 2013 Pavel Zhukov <landgraf@fedoraproject.org> - 0.1-1
 - Initial build
 
