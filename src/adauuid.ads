@@ -1,6 +1,6 @@
 with Interfaces.C; 
 package adauuid is 
-    type UUID is tagged limited private;
+    type UUID is tagged private;
     subtype UUID_String is String(1..36);
     null_uuid : constant UUID_String := (others => '0');
     type UUID_Bin is array (1..16) of Interfaces.C.unsigned_char; 
@@ -23,7 +23,7 @@ package adauuid is
     
     private
     function Generate return UUID_Bin;
-    type UUID is tagged limited record
+    type UUID is tagged record
         Str : UUID_String := (others => '0');
         Bin : UUID_Bin := Generate; 
     end record;
