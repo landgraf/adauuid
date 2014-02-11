@@ -7,6 +7,7 @@ package adauuid is
     type Letter_Case is (None, Upper, Lower); 
 
     function To_String(U : in out UUID) return UUID_String;
+    function To_Bin(U : in out UUID) return UUID_Bin; 
 
     procedure From_String(U : out UUID; Str : in String)
         with Pre => Str'Length <= UUID_String'Length; 

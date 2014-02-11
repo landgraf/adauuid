@@ -3,6 +3,8 @@ package body adauuid is
 
     function To_String(U : in out UUID) return UUID_String is (U.Str);
 
+    function To_Bin(U : in out UUID) return UUID_Bin is (U.Bin);
+
     procedure From_String(U : out UUID; Str : in String) is 
     begin
         U.Str := Str; 
