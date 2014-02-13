@@ -1,6 +1,6 @@
 with "directories";
 project adauuid is 
-    for Source_Dirs use ( Directories.Libdir & "/adauuid/**"); 
+    for Source_Dirs use ( Directories.Includedir & "/adauuid/**"); 
     for Object_Dir use Directories.Libdir & "/adauuid/";
     for Library_Dir use Directories.Libdir & "/adauuid/";
     for Languages use ("Ada");
