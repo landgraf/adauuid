@@ -1,4 +1,5 @@
 with "adauuid_libs_build";
+with "aunit";
 project adauuid_tests_build is 
     for Main use ("adauuid_harness.adb");
     for Exec_Dir use "../bin";
