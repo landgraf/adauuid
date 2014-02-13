@@ -11,6 +11,7 @@ Source0:	%{name}-%{version}.tar.gz
 BuildRequires:	gcc-gnat > 4.8
 BuildRequires:  fedora-gnat-project-common > 3
 BuildRequires:  libuuid-devel
+BuildRequires:  aunit-devel
 
 %description
 %{summary}
