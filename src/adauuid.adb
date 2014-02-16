@@ -1,14 +1,28 @@
 with adauuid_internals; use adauuid_internals;
+with Interfaces.C.Strings;
 package body adauuid is 
 
-    function To_String(U : in out UUID) return UUID_String is (U.Str);
-
-    function To_Bin(U : in out UUID) return UUID_Bin is (U.Bin);
-
-    procedure From_String(U : out UUID; Str : in String) is 
+    function To_String(U : in out UUID) return String is 
+        Str : String (1..36) := (others => '0');
     begin
-        U.Str := Str; 
-        uuid_parse(U.Str, U.Bin);
+        uuid_unparse_upper(U.Bin, Str); 
+        return Str;
+    end To_String; 
+
+    function Bin(U : in out UUID) return UUID_Bin is (U.Bin);
+
+    function From_String(Str : in String) return UUID is 
+        U : UUID;
+        C_String : Interfaces.C.Strings.chars_ptr :=
+            Interfaces.C.Strings.new_string(Str);
+    begin
+        Clear(U); 
+        if Integer(uuid_parse(C_String, U.Bin)) /= 0 then
+            Interfaces.C.Strings.Free(C_String);
+            raise CONSTRAINT_ERROR with "unparse " & Str  & " failed";
+        end if;
+        Interfaces.C.Strings.Free(C_String);
+        return U; 
     end From_String; 
 
     function Generate return UUID_Bin is
@@ -18,22 +32,9 @@ package body adauuid is
         return U;
     end Generate;
             
-    procedure Parse(U : in out UUID; Translate : in Letter_Case := Upper) is
-    begin
-        case Translate is
-            when Upper =>
-                uuid_unparse_upper(U.Bin, U.Str); 
-            when Lower =>
-                uuid_unparse_lower(U.Bin, U.Str); 
-            when others =>
-                uuid_unparse(U.Bin, U.Str); 
-        end case;
-    end Parse;
-
     procedure Clear(U : in out UUID) is 
     begin
         uuid_clear(U.Bin);
-        U.Str := Null_uuid;
     end Clear;
 
     function "="(U1 : in UUID; U2 : in UUID) return Boolean is (Integer(uuid_compare(U1.Bin, U2.Bin)) = 0);
@@ -43,7 +44,6 @@ package body adauuid is
     procedure Copy(Src : in UUID; Dst : out UUID) is
     begin
         uuid_copy(Src => Src.Bin, Dst => Dst.Bin);
-        uuid_unparse(Dst.Bin, Dst.Str);
     end Copy;
 end adauuid; 
 

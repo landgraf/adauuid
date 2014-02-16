@@ -8,8 +8,6 @@ begin
             U1 : UUID;-- := Generate;
             U2 : UUID;--  := Generate;
         begin
-            Parse(U1); 
-            Parse(U2);
             pragma Debug(Put_Line("UUID:  " & U1.To_String & "/" & U2.To_String));
             pragma Assert(U1 = U1);
             pragma Assert(U1 /= U2);

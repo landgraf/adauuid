@@ -6,16 +6,15 @@ package adauuid is
     type UUID_Bin is array (1..16) of Interfaces.C.unsigned_char; 
     type Letter_Case is (None, Upper, Lower); 
 
-    function To_String(U : in out UUID) return UUID_String;
-    function To_Bin(U : in out UUID) return UUID_Bin; 
+    function To_String(U : in out UUID) return String 
+        with Post => To_String'Result'Length = 36; 
 
-    procedure From_String(U : out UUID; Str : in String)
-        with Pre => Str'Length <= UUID_String'Length; 
+    function Bin(U : in out UUID) return UUID_Bin; 
+
+    function From_String(Str : in String) return UUID
+        with Pre => Str'Length = 36;
 
     function Is_Null(Self : in UUID) return Boolean;
-
-    procedure Parse(U : in out UUID; Translate : in Letter_Case := Upper)
-        with Post => U.To_String /= null_uuid; 
 
     procedure Clear(U : in out UUID); 
     function "="(U1 : in UUID; U2 : in UUID) return Boolean;
@@ -25,7 +24,6 @@ package adauuid is
     private
     function Generate return UUID_Bin;
     type UUID is tagged record
-        Str : UUID_String := (others => '0');
         Bin : UUID_Bin := Generate; 
     end record;
 end adauuid; 

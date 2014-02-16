@@ -8,9 +8,6 @@ package adauuid.test_copy is
 
 
     overriding
-    procedure Set_Up (T : in out TC); 
-
-    overriding
     procedure Tear_Down (T : in out TC); 
 
     overriding

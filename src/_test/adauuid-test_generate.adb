@@ -3,13 +3,6 @@ with Aunit.Assertions;
 package body adauuid.test_Generate is 
 
     overriding
-    procedure Set_Up (T : in out TC) is 
-    begin
-        Parse(T.U1); 
-        Parse(T.U2); 
-    end Set_Up; 
-
-    overriding
     procedure Tear_Down (T : in out TC) is 
     begin
         Clear(T.U1); 

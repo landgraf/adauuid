@@ -6,10 +6,6 @@ package adauuid.test_clear is
         U1, U2 : UUID;
     end record;
 
-
-    overriding
-    procedure Set_Up (T : in out TC); 
-
     overriding
     procedure Tear_Down (T : in out TC); 
 
