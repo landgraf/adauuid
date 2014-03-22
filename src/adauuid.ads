@@ -2,8 +2,7 @@ with Interfaces.C;
 package adauuid is
    type UUID is tagged private;
    subtype UUID_String is String (1 .. 36);
-   null_uuid : constant UUID;
-   
+   null_uuid : constant UUID_String := (others => '0');
    type UUID_Bin is array (1 .. 16) of Interfaces.C.unsigned_char;
    type Letter_Case is (None, Upper, Lower);
 
@@ -28,5 +27,4 @@ private
    type UUID is tagged record
        Bin : UUID_Bin := Generate;
    end record;
-   Null_UUID : constant UUID := From_String("00000000-0000-0000-0000-000000000000");
 end adauuid;
