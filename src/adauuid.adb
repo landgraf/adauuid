@@ -2,6 +2,13 @@ with adauuid_internals; use adauuid_internals;
 with Interfaces.C.Strings;
 package body adauuid is
 
+   function Null_UUID return UUID is 
+       U : UUID; 
+   begin
+       adauuid_internals.uuid_clear(U.Bin); 
+       return U;
+   end Null_UUID;
+
    function Bin (U : in out UUID) return UUID_Bin is (U.Bin);
 
    procedure Clear (U : in out UUID) is

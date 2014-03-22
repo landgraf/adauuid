@@ -2,7 +2,6 @@ with Interfaces.C;
 package adauuid is
    type UUID is tagged private;
    subtype UUID_String is String (1 .. 36);
-   null_uuid : constant UUID_String := (others => '0');
    type UUID_Bin is array (1 .. 16) of Interfaces.C.unsigned_char;
    type Letter_Case is (None, Upper, Lower);
 
@@ -20,8 +19,10 @@ package adauuid is
 
    overriding
    function "=" (U1 : in UUID; U2 : in UUID) return Boolean;
+
    procedure Copy (Src : in UUID; Dst : out UUID);
 
+   function Null_UUID return UUID; 
 private
    function Generate return UUID_Bin;
    type UUID is tagged record
