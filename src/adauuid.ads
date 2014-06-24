@@ -5,7 +5,7 @@ package adauuid is
    type UUID_Bin is array (1 .. 16) of Interfaces.C.unsigned_char;
    type Letter_Case is (None, Upper, Lower);
 
-   function To_String (U : in out UUID) return String
+   function To_String (U : in UUID) return String
        with Post => To_String'Result'Length = 36;
 
    function Bin (U : in out UUID) return UUID_Bin;
@@ -19,6 +19,9 @@ package adauuid is
 
    overriding
    function "=" (U1 : in UUID; U2 : in UUID) return Boolean;
+
+   function "<" (U1 : in UUID; U2 : in UUID) return Boolean
+       is (U1.To_String < U2.To_String);
 
    procedure Copy (Src : in UUID; Dst : out UUID);
 

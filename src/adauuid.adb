@@ -48,7 +48,7 @@ package body adauuid is
    function Is_Null (Self : in UUID) return Boolean is
        (Integer (uuid_is_null (Self.Bin)) /= 0);
 
-   function To_String (U : in out UUID) return String is
+   function To_String (U : in UUID) return String is
       Str : String (1 .. 36) := (others => '0');
    begin
       uuid_unparse_upper (U.Bin, Str);
