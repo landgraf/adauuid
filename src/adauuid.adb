@@ -9,7 +9,7 @@ package body adauuid is
        return U;
    end Null_UUID;
 
-   function Bin (U : in out UUID) return UUID_Bin is (U.Bin);
+   function Bin (U : in UUID) return UUID_Bin is (U.Bin);
 
    procedure Clear (U : in out UUID) is
    begin
