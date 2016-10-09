@@ -1,8 +1,9 @@
 with Interfaces.C;
+with Ada.Containers;
 package adauuid is
    type UUID is tagged private;
    subtype UUID_String is String (1 .. 36);
-   type UUID_Bin is array (1 .. 16) of Interfaces.C.unsigned_char;
+   subtype UUID_Bin is Interfaces.C.Char_Array(1..16);
    type Letter_Case is (None, Upper, Lower);
 
    function To_String (U : in UUID) return String
@@ -26,6 +27,8 @@ package adauuid is
    procedure Copy (Src : in UUID; Dst : out UUID);
 
    function Null_UUID return UUID; 
+   
+   function Hash (U : in Uuid) return Ada.Containers.Hash_Type;
 private
    function Generate return UUID_Bin;
    type UUID is tagged record

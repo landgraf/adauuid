@@ -1,5 +1,6 @@
 with adauuid_internals; use adauuid_internals;
 with Interfaces.C.Strings;
+with Ada.Strings.Fixed.Hash;
 package body adauuid is
 
    function Null_UUID return UUID is 
@@ -54,5 +55,11 @@ package body adauuid is
       uuid_unparse_upper (U.Bin, Str);
       return Str;
    end To_String;
-
+   
+   function Hash (U : in Uuid) return Ada.Containers.Hash_Type is
+      use Interfaces.C;
+   begin
+      return Ada.Strings.Fixed.Hash(To_Ada((if Is_Nul_Terminated (U.Bin) then U.Bin else U.Bin & Nul)));
+   end Hash;
+   
 end adauuid;
