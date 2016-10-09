@@ -8,7 +8,7 @@ package adauuid is
    function To_String (U : in UUID) return String
        with Post => To_String'Result'Length = 36;
 
-   function Bin (U : in out UUID) return UUID_Bin;
+   function Bin (U : in UUID) return UUID_Bin;
 
    function From_String (Str : in String) return UUID
        with Pre => Str'Length = 36;
