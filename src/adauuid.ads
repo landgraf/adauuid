@@ -2,13 +2,13 @@ with Interfaces.C;
 package adauuid is
    type UUID is tagged private;
    subtype UUID_String is String (1 .. 36);
-   type UUID_Bin is mod 2**4;
+   type UUID_Bin is array (1 .. 16) of Interfaces.C.unsigned_char;
    type Letter_Case is (None, Upper, Lower);
 
    function To_String (U : in UUID) return String
        with Post => To_String'Result'Length = 36;
 
-   function Bin (U : in UUID) return UUID_Bin;
+   function Bin (U : in out UUID) return UUID_Bin;
 
    function From_String (Str : in String) return UUID
        with Pre => Str'Length = 36;
