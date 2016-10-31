@@ -1,0 +1,20 @@
+os:
+  - linux
+
+language: generic
+
+services:
+
+before_install:
+  - export GNAT_NAME=gnat-gpl-2016-x86_64-linux-bin
+  - export GNAT_PATH=/opt/gnat/
+  - wget http://mirrors.cdn.adacore.com/art/5739cefdc7a447658e0b016b -O gnat-2016.tar.gz
+  - tar -xvf gnat-2016.tar.gz
+  - cd $GNAT_NAME; echo -e "\n${GNAT_PATH}\ny\ny\n" | ./doinstall
+  - export PATH="${GNAT_PATH}/bin/":$PATH
+  - cd $TRAVIS_BUILD_DIR
+
+script:
+  - gnatls -v
+  - make
+  - make tests
