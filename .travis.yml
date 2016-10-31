@@ -18,3 +18,7 @@ script:
   - gnatls -v
   - make
   - make tests
+
+cache:
+  directories
+  - /opt/gnat/
