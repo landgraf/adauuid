@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
---                              Ada Logging framework                       --
+--                         Ada UUID - Thin binding to libuuid              --
 --                                                                          --
 --        Copyright (C) 2013, Pavel Zhukov <pavel at zhukoff dot net>       --
 --                                                                          --
