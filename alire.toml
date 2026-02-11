@@ -6,7 +6,7 @@ maintainers = ["Pavel Zhukov <pavel@zhukoff.net>"]
 licenses = "GPL-3.0-or-later"
 website = "https://github.com/landgraf/adauuid"
 
-project-files = ["gnat/adauuid.gpr"]
+project-files = ["adauuid.gpr"]
 
 [[depends-on]]
 uuid = "*"
